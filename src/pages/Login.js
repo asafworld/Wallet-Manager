@@ -1,5 +1,5 @@
 import React from 'react';
-import connect from 'react-redux/lib/connect/connect';
+import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import userAction from '../actions/userAction';
 
@@ -34,7 +34,6 @@ class Login extends React.Component {
 
   onChange = (event) => {
     this.setState({ email: event.target.value });
-    this.emailVerification(event);
   }
 
   onChangePass = (event) => {
