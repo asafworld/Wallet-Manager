@@ -7,7 +7,7 @@ const walletState = {
 const wallet = (state = walletState, action) => {
   switch (action.type) {
   case 'wallet':
-    return { ...state, wallet: action.payload };
+    return { ...state, ...action.payload };
   default:
     return state;
   }
