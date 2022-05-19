@@ -7,8 +7,18 @@ class Header extends React.Component {
     if (totalValue.length === 0) {
       return (<h6 data-testid="total-field">0</h6>);
     }
-    const total = totalValue.reduce((a, b) => a + b);
-    return (<h6 data-testid="total-field">{ total }</h6>);
+    const value = totalValue.map((val) => {
+      const expRates = Object.values(val.exchangeRates);
+      const currency = expRates.find((curr) => curr.code === val.currency);
+      console.log(currency.ask);
+      return Number(val.value) * Number(currency.ask);
+    });
+    console.log(value);
+    if (value.length === 0) {
+      return (<h6 data-testid="total-field">0</h6>);
+    }
+    const total = value.reduce((a, b) => a + b);
+    return (<h6 data-testid="total-field">{ total.toFixed(2) }</h6>);
   }
 
   render() {

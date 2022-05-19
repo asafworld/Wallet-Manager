@@ -8,6 +8,13 @@ const wallet = (state = walletState, action) => {
   switch (action.type) {
   case 'wallet':
     return { ...state, ...action.payload };
+  case 'expenses':
+    return {
+      ...state,
+      expenses: [...state.expenses,
+        { ...action.payload,
+          id: state.expenses.length,
+          exchangeRates: action.exchangeRates }] };
   default:
     return state;
   }
