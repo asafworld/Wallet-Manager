@@ -15,12 +15,18 @@ class Header extends React.Component {
     const { emailValue, totalValue } = this.props;
     console.log(emailValue);
     return (
-      <article>
-        <div>Hello, TrybeWallet!</div>
-        <h4 data-testid="email-field">{ emailValue }</h4>
-        <h6 data-testid="header-currency-field">BRL</h6>
-        { this.expensesSum(totalValue) }
-      </article>
+      <header>
+        <h1>TrybeWallet</h1>
+        <div className="header-hello-user">
+          <h2>Hello, TrybeWallet!</h2>
+          <h4 data-testid="email-field">{ emailValue }</h4>
+        </div>
+        <div>
+          { this.expensesSum(totalValue) }
+          <br />
+          <h6 data-testid="header-currency-field">BRL</h6>
+        </div>
+      </header>
     );
   }
 }

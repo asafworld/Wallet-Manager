@@ -1,3 +1,5 @@
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +7,68 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(49, 139, 109);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+header {
+  background-color: rgb(20, 134, 20);
+  color: lightgray;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+header h1, h2, h4, h6 {
+  text-align: center;
+}
+
+header div {
+  display: flex;
+}
+
+.header-hello-user {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.login-article {
+  max-width: 50%;
+  margin: auto;
+  margin-top: 20%;
+  background-color: rgb(20, 134, 20);
+  color: lightgray;
+  border: 2px solid lightgray;
+}
+
+.login-article hr {
+  width: 200px;
+}
+
+.login-article form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-article form label {
+  padding: 5px;
+  margin-right: 50px;
+}
+
+.login-article form input {
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.login-article form button {
+  margin-top: 5px;
+  padding: 10px;
 }

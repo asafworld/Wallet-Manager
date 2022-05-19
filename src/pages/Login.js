@@ -45,7 +45,7 @@ class Login extends React.Component {
     const { disable, email, password } = this.state;
     const { history, dispatchEmail } = this.props;
     return (
-      <article>
+      <article className="login-article">
         <form>
           <label htmlFor="email-input">
             Login

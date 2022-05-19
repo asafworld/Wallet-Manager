@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import Header from './Header';
 import walletAction from '../actions/walletAction';
+import ExpForm from './ExpForm';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -24,8 +25,8 @@ class Wallet extends React.Component {
   render() {
     return (
       <article>
-        <div>TrybeWallet</div>
         <Header />
+        <ExpForm />
       </article>
     );
   }
