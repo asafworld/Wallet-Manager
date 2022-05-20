@@ -22,45 +22,44 @@ class ExpInfo extends React.Component {
             <th>Editar/Excluir</th>
           </thead>
           <tbody>
-            { expenses.length === 0 ? <h6>Sem despesas registradas</h6> : (
-              expenses.map((exp) => (
-                <tr key={ exp.id }>
-                  <td>{ exp.description }</td>
-                  <td>{ exp.tag }</td>
-                  <td>{ exp.method }</td>
-                  <td>{ Number(exp.value).toFixed(2) }</td>
-                  <td>
-                    { Object.values(exp.exchangeRates).map((exc) => {
-                      let excCrr;
-                      if (exc.code === exp.currency && exc.name !== dolarTurismo) {
-                        excCrr = exc.name;
-                      }
-                      return excCrr;
-                    })}
-                  </td>
-                  <td>
-                    { Object.values(exp.exchangeRates).map((exc) => {
-                      let excAsk;
-                      if (exc.code === exp.currency && exc.name !== dolarTurismo) {
-                        excAsk = (Number(exc.ask).toFixed(2));
-                        console.log(excAsk);
-                      }
-                      return excAsk;
-                    })}
-                  </td>
-                  <td>
-                    { Object.values(exp.exchangeRates).map((exc) => {
-                      let excValue;
-                      if (exc.code === exp.currency && exc.name !== dolarTurismo) {
-                        excValue = (Number(exp.value) * Number(exc.ask)).toFixed(2);
-                      }
-                      return excValue;
-                    })}
-                  </td>
-                  <td>Real</td>
-                  <td />
-                </tr>
-              )))}
+            { expenses.map((exp) => (
+              <tr key={ exp.id }>
+                <td>{ exp.description }</td>
+                <td>{ exp.tag }</td>
+                <td>{ exp.method }</td>
+                <td>{ Number(exp.value).toFixed(2) }</td>
+                <td>
+                  { Object.values(exp.exchangeRates).map((exc) => {
+                    let excCrr;
+                    if (exc.code === exp.currency && exc.name !== dolarTurismo) {
+                      excCrr = exc.name;
+                    }
+                    return excCrr;
+                  })}
+                </td>
+                <td>
+                  { Object.values(exp.exchangeRates).map((exc) => {
+                    let excAsk;
+                    if (exc.code === exp.currency && exc.name !== dolarTurismo) {
+                      excAsk = (Number(exc.ask).toFixed(2));
+                      console.log(excAsk);
+                    }
+                    return excAsk;
+                  })}
+                </td>
+                <td>
+                  { Object.values(exp.exchangeRates).map((exc) => {
+                    let excValue;
+                    if (exc.code === exp.currency && exc.name !== dolarTurismo) {
+                      excValue = (Number(exp.value) * Number(exc.ask)).toFixed(2);
+                    }
+                    return excValue;
+                  })}
+                </td>
+                <td>Real</td>
+                <td />
+              </tr>
+            ))}
           </tbody>
         </table>
       </article>
