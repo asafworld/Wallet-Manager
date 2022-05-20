@@ -10,6 +10,11 @@ class ExpInfo extends React.Component {
     deleteDispatch(newExp);
   }
 
+  editOnClick = (exp) => {
+    const { expForEdit } = this.props;
+    expForEdit(exp);
+  }
+
   render() {
     const { expenses } = this.props;
     const dolarTurismo = 'Dólar Turismo';
@@ -64,7 +69,13 @@ class ExpInfo extends React.Component {
                 </td>
                 <td>Real</td>
                 <td>
-                  <button type="button" data-testid="edit-btn">Editar</button>
+                  <button
+                    type="button"
+                    data-testid="edit-btn"
+                    onClick={ () => this.editOnClick(exp) }
+                  >
+                    Editar
+                  </button>
                   <button
                     type="button"
                     data-testid="delete-btn"
@@ -93,6 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
 ExpInfo.propTypes = {
   expenses: propTypes.arrayOf.isRequired,
   deleteDispatch: propTypes.func.isRequired,
+  expForEdit: propTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpInfo);

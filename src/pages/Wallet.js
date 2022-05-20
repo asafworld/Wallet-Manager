@@ -5,14 +5,16 @@ import Header from './Header';
 import walletAction from '../actions/walletAction';
 import ExpForm from './ExpForm';
 import ExpInfo from './ExpInfo';
+import EditExpense from './EditExpense';
 
 class Wallet extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     value: '',
-  //   };
-  // }
+  constructor() {
+    super();
+    this.state = {
+      editedExp: {},
+      inEdit: false,
+    };
+  }
 
   componentDidMount() {
     const { dispatchCurrency } = this.props;
@@ -28,37 +30,32 @@ class Wallet extends React.Component {
           };
           dispatchCurrency(obj);
         }));
-    // this.expensesSum();
   }
 
-  // expensesSum = () => {
-  //   const { totalValue } = this.props;
-  //   console.log(totalValue);
-  //   if (totalValue.length === 0) {
-  //     this.setState({ value: 0 });
-  //   } else {
-  //     const value = totalValue.map((val) => {
-  //       const expRates = Object.values(val.exchangeRates);
-  //       const currency = expRates.find((curr) => curr.code === val.currency);
-  //       return Number(val.value) * Number(currency.ask);
-  //     });
-  //     console.log(value);
-  //     if (value.length === 0) {
-  //       this.setState({ value: 0 });
-  //     }
-  //     const total = value.reduce((a, b) => a + b);
-  //     this.setState({ value: total.toFixed(2) });
-  //   }
-  // }
+  expForEdit = (exp) => {
+    this.setState({
+      editedExp: exp,
+      inEdit: true,
+    });
+  }
+
+  inEditFunc = () => {
+    this.setState({ inEdit: false });
+  }
 
   render() {
     const { value } = this.props;
+    const { editedExp, inEdit } = this.state;
     console.log(value);
     return (
       <article>
         <Header value={ value } />
-        <ExpForm />
-        <ExpInfo />
+        { !inEdit ? <ExpForm /> : (
+          <EditExpense
+            editedExp={ editedExp }
+            inEditFunc={ this.inEditFunc }
+          />)}
+        <ExpInfo expForEdit={ this.expForEdit } />
       </article>
     );
   }
