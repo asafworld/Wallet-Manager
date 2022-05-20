@@ -6,6 +6,7 @@ class ExpInfo extends React.Component {
   render() {
     const { expenses } = this.props;
     // { value, currency, method, description, tag }
+    const dolarTurismo = 'Dólar Turismo';
     return (
       <article>
         <table>
@@ -27,11 +28,11 @@ class ExpInfo extends React.Component {
                   <td>{ exp.description }</td>
                   <td>{ exp.tag }</td>
                   <td>{ exp.method }</td>
-                  <td>{ exp.value }</td>
+                  <td>{ Number(exp.value).toFixed(2) }</td>
                   <td>
                     { Object.values(exp.exchangeRates).map((exc) => {
                       let excCrr;
-                      if (exc.code === exp.currency) {
+                      if (exc.code === exp.currency && exc.name !== dolarTurismo) {
                         excCrr = exc.name;
                       }
                       return excCrr;
@@ -40,8 +41,9 @@ class ExpInfo extends React.Component {
                   <td>
                     { Object.values(exp.exchangeRates).map((exc) => {
                       let excAsk;
-                      if (exc.code === exp.currency) {
-                        excAsk = exc.ask;
+                      if (exc.code === exp.currency && exc.name !== dolarTurismo) {
+                        excAsk = (Number(exc.ask).toFixed(2));
+                        console.log(excAsk);
                       }
                       return excAsk;
                     })}
@@ -49,22 +51,13 @@ class ExpInfo extends React.Component {
                   <td>
                     { Object.values(exp.exchangeRates).map((exc) => {
                       let excValue;
-                      if (exc.code === exp.currency) {
+                      if (exc.code === exp.currency && exc.name !== dolarTurismo) {
                         excValue = (Number(exp.value) * Number(exc.ask)).toFixed(2);
                       }
                       return excValue;
                     })}
                   </td>
-                  <td>
-                    {/* { exp.exchangeRates.map((exc) => {
-                      let excConv;
-                      if (exc.code === exp.currency) {
-                        excConv = exc.codein;
-                      }
-                      return excConv;
-                    })} */}
-                    Real
-                  </td>
+                  <td>Real</td>
                   <td />
                 </tr>
               )))}
