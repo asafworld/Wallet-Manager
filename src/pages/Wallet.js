@@ -7,6 +7,13 @@ import ExpForm from './ExpForm';
 import ExpInfo from './ExpInfo';
 
 class Wallet extends React.Component {
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     value: '',
+  //   };
+  // }
+
   componentDidMount() {
     const { dispatchCurrency } = this.props;
     fetch('https://economia.awesomeapi.com.br/json/all')
@@ -21,12 +28,35 @@ class Wallet extends React.Component {
           };
           dispatchCurrency(obj);
         }));
+    // this.expensesSum();
   }
 
+  // expensesSum = () => {
+  //   const { totalValue } = this.props;
+  //   console.log(totalValue);
+  //   if (totalValue.length === 0) {
+  //     this.setState({ value: 0 });
+  //   } else {
+  //     const value = totalValue.map((val) => {
+  //       const expRates = Object.values(val.exchangeRates);
+  //       const currency = expRates.find((curr) => curr.code === val.currency);
+  //       return Number(val.value) * Number(currency.ask);
+  //     });
+  //     console.log(value);
+  //     if (value.length === 0) {
+  //       this.setState({ value: 0 });
+  //     }
+  //     const total = value.reduce((a, b) => a + b);
+  //     this.setState({ value: total.toFixed(2) });
+  //   }
+  // }
+
   render() {
+    const { value } = this.props;
+    console.log(value);
     return (
       <article>
-        <Header />
+        <Header value={ value } />
         <ExpForm />
         <ExpInfo />
       </article>
@@ -38,8 +68,13 @@ const mapDispatchToProps = (dispatch) => ({
   dispatchCurrency: (state) => dispatch(walletAction(state)),
 });
 
+const mapStateToProps = (state) => ({
+  value: state.wallet.total,
+});
+
 Wallet.propTypes = {
   dispatchCurrency: propTypes.func.isRequired,
+  value: propTypes.number.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Wallet);
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

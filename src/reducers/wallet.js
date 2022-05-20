@@ -15,6 +15,8 @@ const wallet = (state = walletState, action) => {
         { ...action.payload,
           id: state.expenses.length,
           exchangeRates: action.exchangeRates }] };
+  case 'update':
+    return { ...state, expenses: action.payload };
   default:
     return state;
   }

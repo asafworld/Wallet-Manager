@@ -1,16 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import updateAction from '../actions/updateAction';
 
 class ExpInfo extends React.Component {
+  deleteOnClick = (description) => {
+    const { expenses, deleteDispatch } = this.props;
+    const newExp = expenses.filter((exp) => exp.description !== description);
+    deleteDispatch(newExp);
+  }
+
   render() {
     const { expenses } = this.props;
-    // { value, currency, method, description, tag }
     const dolarTurismo = 'Dólar Turismo';
     return (
       <article>
         <table>
-          <thead>
+          <tr>
             <th>Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>
@@ -20,7 +26,7 @@ class ExpInfo extends React.Component {
             <th>Valor convertido</th>
             <th>Moeda de conversão</th>
             <th>Editar/Excluir</th>
-          </thead>
+          </tr>
           <tbody>
             { expenses.map((exp) => (
               <tr key={ exp.id }>
@@ -57,7 +63,16 @@ class ExpInfo extends React.Component {
                   })}
                 </td>
                 <td>Real</td>
-                <td />
+                <td>
+                  <button type="button" data-testid="edit-btn">Editar</button>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                    onClick={ () => this.deleteOnClick(exp.description) }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -71,8 +86,13 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  deleteDispatch: (state) => dispatch(updateAction(state)),
+});
+
 ExpInfo.propTypes = {
   expenses: propTypes.arrayOf.isRequired,
+  deleteDispatch: propTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(ExpInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpInfo);

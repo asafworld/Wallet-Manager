@@ -3,27 +3,28 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class Header extends React.Component {
-  expensesSum = (totalValue) => {
+  expensesSum = () => {
+    const { totalValue } = this.props;
+    let total;
     if (totalValue.length === 0) {
-      return (<h6 data-testid="total-field">0</h6>);
+      total = 0;
+    } else {
+      const value = totalValue.map((val) => {
+        const expRates = Object.values(val.exchangeRates);
+        const currency = expRates.find((curr) => curr.code === val.currency);
+        return Number(val.value) * Number(currency.ask);
+      });
+      if (value.length === 0) {
+        total = 0;
+      }
+      const totalSum = value.reduce((a, b) => a + b);
+      total = totalSum.toFixed(2);
     }
-    const value = totalValue.map((val) => {
-      const expRates = Object.values(val.exchangeRates);
-      const currency = expRates.find((curr) => curr.code === val.currency);
-      console.log(currency.ask);
-      return Number(val.value) * Number(currency.ask);
-    });
-    console.log(value);
-    if (value.length === 0) {
-      return (<h6 data-testid="total-field">0</h6>);
-    }
-    const total = value.reduce((a, b) => a + b);
-    return (<h6 data-testid="total-field">{ total.toFixed(2) }</h6>);
+    return total;
   }
 
   render() {
-    const { emailValue, totalValue } = this.props;
-    console.log(emailValue);
+    const { emailValue } = this.props;
     return (
       <header>
         <h1>TrybeWallet</h1>
@@ -32,7 +33,7 @@ class Header extends React.Component {
           <h4 data-testid="email-field">{ emailValue }</h4>
         </div>
         <div>
-          { this.expensesSum(totalValue) }
+          <h6 data-testid="total-field">{ this.expensesSum() }</h6>
           <br />
           <h6 data-testid="header-currency-field">BRL</h6>
         </div>
