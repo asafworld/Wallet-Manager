@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import Header from './Header';
 import walletAction from '../actions/walletAction';
 import ExpForm from './ExpForm';
+import ExpInfo from './ExpInfo';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class Wallet extends React.Component {
       <article>
         <Header />
         <ExpForm />
+        <ExpInfo />
       </article>
     );
   }
