@@ -35,7 +35,7 @@ class ExpForm extends React.Component {
     const { value, currency, method, description, tag } = this.state;
     return (
       <article>
-        <form>
+        <form className="expForm">
           <label htmlFor="value-input">
             Valor
             <input

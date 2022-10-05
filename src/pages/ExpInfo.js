@@ -20,7 +20,7 @@ class ExpInfo extends React.Component {
     const dolarTurismo = 'Dólar Turismo';
     return (
       <article>
-        <table>
+        <table className='header-table'>
           <tr>
             <th>Descrição</th>
             <th>Tag</th>

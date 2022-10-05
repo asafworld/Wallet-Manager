@@ -72,3 +72,36 @@ header div {
   margin-top: 5px;
   padding: 10px;
 }
+
+.expForm {
+  margin: auto;
+  max-width: 95%;
+  padding: 10px;
+  background-color: white;
+  opacity: 90%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.expForm label {
+  padding: 5px;
+}
+
+.header-table {
+  margin: auto;
+  max-width: 95%;
+  color: white;
+  background-color: black;
+  opacity: 50%;
+  margin-top: 5px;
+}
+
+.header-table th {
+  padding: 5px;
+  max-width: 90%;
+  margin: auto;
+}
+
+.header-table tr {
+  text-align: center;
+}
